@@ -1,2 +1,8 @@
 # LessonsCollection
-collect all relevant Java projects to teach in HTL 3rd level
+Collect all relevant Java projects from SEW 3rd level
+
+## Autohaendler - repeat Interfaces
+## Observer Pattern - important Pattern
+## Simple Calculator - simple calculator in JavaFX
+## Quiz Application - Quiz application in JavaFX
+## Collection Tests - test some collection methods for a better understanding
