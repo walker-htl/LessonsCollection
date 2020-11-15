@@ -7,7 +7,38 @@ public class Main {
         LinkedList();
     }
 
+    private static void LinkedList() {
+        System.out.println();
+        System.out.println("Linked List - Iterator forward backward");
+        System.out.println();
+
+        // Must be a linked list, not "only" a list
+        LinkedList<String> llist = new LinkedList<>();
+
+        llist.add("A");
+        llist.add("B");
+        llist.add("C");
+        llist.add("D");
+
+        Iterator iterator = llist.listIterator();
+
+        System.out.println("start --> end");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        Iterator iter = llist.descendingIterator();
+
+        System.out.println("end --> start");
+        while (iter.hasNext()) {
+            System.out.println(iter.next());
+        }
+    }
+
     private static void ArrayList() {
+        System.out.println("ArrayList and its Collection methods");
+        System.out.println();
+
         List<String> arrList = new ArrayList<String>();
         for (int i = 1; i <= 10; i++) {
             arrList.add("Obj" + i);
