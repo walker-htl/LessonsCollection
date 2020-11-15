@@ -6,6 +6,51 @@ public class Main {
         ArrayList();
         LinkedList();
         ListIterator();
+        HashTable();
+    }
+
+    private static void HashTable() {
+        System.out.println();
+        System.out.println("HashTable - better understandig!");
+        System.out.println();
+
+        Hashtable<String, String> table = new Hashtable<>();
+        table.put("abcd", "0000");
+        table.put("abyz", "1234");
+        table.put("abz[", "4578");
+
+        // possibility to see all elements
+        System.out.println(table);
+
+        System.out.println();
+        System.out.println("Key iteration with equal keys");
+        Iterator kIterator = table.keySet().iterator();
+
+        while (kIterator.hasNext())
+        {
+            Object element = kIterator.next();
+            System.out.println( "key: " + element + ", hashcode: " + element.hashCode());
+        }
+
+        System.out.println();
+        System.out.println("Value iteration");
+        Iterator vIterator = table.values().iterator();
+
+        while (vIterator.hasNext())
+        {
+            Object element = vIterator.next();
+            System.out.println( "value: " + element + ", hashcode: " + element.hashCode());
+        }
+
+        System.out.println();
+        System.out.println("Entry iteration");
+        Iterator eIterator = table.entrySet().iterator();
+
+        while (eIterator.hasNext())
+        {
+            Object element = eIterator.next();
+            System.out.println( "entry: " + element + ", hashcode: " + element.hashCode());
+        }
     }
 
     private static void ListIterator() {
