@@ -5,6 +5,44 @@ public class Main {
     public static void main(String[] args) {
         ArrayList();
         LinkedList();
+        ListIterator();
+    }
+
+    private static void ListIterator() {
+        System.out.println();
+        System.out.println("ListIterator - backward iteration and methods");
+        System.out.println();
+
+        LinkedList<Smurf> smurfs = new LinkedList<>();
+        smurfs.add(new Smurf(1, "Brainy", 25));
+        smurfs.add(new Smurf(2, "Grouchy", 25));
+        smurfs.add(new Smurf(3, "Clumsy", 15));
+        smurfs.add(new Smurf(4, "Greedy", 5));
+        smurfs.add(new Smurf(5, "Jokey", 9));
+
+        ListIterator<Smurf> iterator = smurfs.listIterator();
+
+        System.out.println("start --> end");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        System.out.println();
+        System.out.println("Add the Chef!");
+        iterator.add(new Smurf(6, "Chef", 1));
+
+        System.out.println("end --> start");
+        while (iterator.hasPrevious()) {
+            System.out.println(iterator.previous());
+        }
+
+        System.out.println();
+        System.out.println("Set the NewBrain!");
+        iterator.set(new Smurf(1, "NewBrain", 25));
+        System.out.println("start --> end");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 
     private static void LinkedList() {
