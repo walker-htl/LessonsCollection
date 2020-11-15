@@ -8,6 +8,34 @@ public class Main {
         ListIterator();
         HashTable();
         HashSet();
+        TreeSet();
+    }
+
+    private static void TreeSet() {
+        System.out.println();
+        System.out.println("TreeSet - better understandig!");
+        System.out.println();
+
+        TreeSet<MyPerson> set = new TreeSet<>();
+        set.add(new MyPerson("A", "abyz", 25));
+        set.add(new MyPerson("A", "abz[", 25));
+        set.add(new MyPerson("B", "aaa", 5));
+        set.add(new MyPerson("B", "aba", 5));
+
+        for (Person element:set) {
+            System.out.println(element + ", hasCode: " + element.hashCode());
+        }
+
+        System.out.println();
+        System.out.println("First Element: " + set.first());
+        System.out.println("Last Element: " + set.last());
+
+        System.out.println();
+        System.out.println("Show all elements smaller then the last element");
+        SortedSet<MyPerson> sortedSet = set.headSet(set.last());
+        for (Person element:sortedSet) {
+            System.out.println(element + ", hasCode: " + element.hashCode());
+        }
     }
 
     private static void HashSet() {

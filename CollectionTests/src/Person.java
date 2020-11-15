@@ -39,4 +39,16 @@ public class Person {
                 ", personalNr=" + personalNr +
                 '}';
     }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public String getPrename() {
+        return prename;
+    }
+
+    public int getPersonalNr() {
+        return personalNr;
+    }
 }
