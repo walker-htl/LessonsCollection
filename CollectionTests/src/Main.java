@@ -7,6 +7,23 @@ public class Main {
         LinkedList();
         ListIterator();
         HashTable();
+        HashSet();
+    }
+
+    private static void HashSet() {
+        System.out.println();
+        System.out.println("HashSet - better understandig!");
+        System.out.println();
+
+        Set<Person> set = new HashSet<>();
+        set.add(new Person("A", "abyz", 25));
+        set.add(new Person("A", "abyz", 25));
+        set.add(new Person("A", "abz[", 25));
+        set.add(new Person("B", "Greedy", 5));
+
+        for (Person element:set) {
+            System.out.println(element + ", hasCode: " + element.hashCode());
+        }
     }
 
     private static void HashTable() {
