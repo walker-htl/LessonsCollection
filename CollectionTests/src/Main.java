@@ -3,6 +3,11 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
+        ArrayList();
+        LinkedList();
+    }
+
+    private static void ArrayList() {
         List<String> arrList = new ArrayList<String>();
         for (int i = 1; i <= 10; i++) {
             arrList.add("Obj" + i);
