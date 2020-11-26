@@ -13,6 +13,7 @@ public class Person {
         this.personalNr = personalNr;
     }
 
+    @Override
     public int hashCode()
     {
         return lastname.hashCode() +
@@ -20,6 +21,7 @@ public class Person {
                 personalNr;
     }
 
+    @Override
     public boolean equals(Object o) {
         if ((o == null) || (o.getClass() != this.getClass()))
             return false;
