@@ -3,18 +3,84 @@ import java.util.*;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList();
-        LinkedList();
-        ListIterator();
-        HashTable();
-        HashSet();
-        TreeSet();
+        //ArrayList();
+        //LinkedList();
+        //ListIterator();
+        //HashTable();
+        //HashSet();
+        //TreeSet();
+        SetOperation();
     }
+
+    private static void SetOperation() {
+        System.out.println();
+        System.out.println("Set operations - better understandig!");
+        System.out.println();
+
+        TreeSet<Integer> setA = new TreeSet<>();
+        setA.add(1);
+        setA.add(2);
+        setA.add(3);
+        setA.add(4);
+        setA.add(5);
+        printSet("A", setA);
+
+        TreeSet<Integer> setB = new TreeSet<>();
+        setB.add(4);
+        setB.add(5);
+        setB.add(6);
+        setB.add(7);
+        setB.add(8);
+        printSet("B", setB);
+
+        TreeSet<Integer> setC = new TreeSet<>();
+        setC.add(7);
+        printSet("C", setC);
+
+        // Union of sets (Vereinigung von Mengen)
+        setA.addAll(setB);
+        printSet("union(A,B)", setA);
+
+        // Difference of sets (Differenz von Mengen)
+        setA.removeAll(setB);
+        printSet("diff(A,B)", setA);
+
+        // we lost element 4 and 5
+        setA.add(4);
+        setA.add(5);
+        printSet("setA added 2 elemnts", setA);
+
+        // clone SetA to cloneSetA
+        TreeSet<Integer> cloneSetA = (TreeSet<Integer>)setA.clone();
+        printSet("clone setA", cloneSetA);
+
+        // Intersection of stes (Scheiden von Mengen)
+        setA.retainAll(setB);
+        printSet("intersect(A,B)", setA);
+
+        // Contain
+        System.out.println("Does setA contain C: " + setA.containsAll(setC));
+        System.out.println("Does setB contain C: " + setB.containsAll(setC));
+    }
+
+    private static void printSet(String name, TreeSet<Integer> setA) {
+        System.out.print(name+": ");
+        for (Integer element: setA) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
 
     private static void TreeSet() {
         System.out.println();
         System.out.println("TreeSet - better understandig!");
         System.out.println();
+
+        // Why does this code not work?
+        //TreeSet<Person> testSet = new TreeSet<>();
+        //testSet.add(new Person("A", "abyz", 25));
+        //testSet.add(new Person("A", "abz[", 25));
 
         TreeSet<MyPerson> set = new TreeSet<>();
         set.add(new MyPerson("A", "abyz", 25));

@@ -1,5 +1,5 @@
 public class Person {
-    private String lastname;
+    private final String lastname;
     private String prename;
     private int personalNr;
 
