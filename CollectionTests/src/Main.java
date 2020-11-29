@@ -9,7 +9,68 @@ public class Main {
         //HashTable();
         //HashSet();
         //TreeSet();
-        SetOperation();
+        //SetOperation();
+        //HashMap();
+        TreeMap();
+    }
+
+    private static void TreeMap() {
+        Map<String, MyPerson> treemap = new TreeMap<String, MyPerson>();
+        MyPerson personA = new MyPerson("Meier", "Heinz", 33);
+        String keyA = "16233686";       //weitere Schluessel und Objekte erzeugen
+        treemap.put(keyA, personA);     //weitere Schluessel-Wert-Paare hinzufügen
+        treemap.put("007", new MyPerson("Craig", "Daniel", 51));
+        treemap.put("23", new MyPerson("Wilkerson", "Malcom", 18));
+        treemap.put("42", new MyPerson("Douglas", "Adams", 49));
+
+        System.out.println("\nHashMap sequentiell durchlaufen:");
+        for (Map.Entry<String, MyPerson> e : treemap.entrySet()) {
+            String key = e.getKey();
+            MyPerson person = e.getValue();
+            System.out.println("SchluesselHash: " + key.hashCode() + " Schluessel: " + key +
+                    " Name: " + person.getLastname() + ", " +
+                    person.getPrename() + " Personal-Nr: " +
+                    person.getPersonalNr());
+        }
+
+        System.out.println();
+        System.out.println("Sort a TreeMap with an anonymous Comparator");
+        List<Map.Entry<String, MyPerson>> list = new LinkedList<>(treemap.entrySet());
+
+        // not scope of our training, but still interessting!
+        Collections.sort(list, new Comparator<Map.Entry<String, MyPerson>>() {
+            @Override
+            public int compare(Map.Entry<String, MyPerson> o1, Map.Entry<String, MyPerson> o2) {
+                return o1.getValue().getLastname().compareTo(o2.getValue().getLastname());
+            }
+        });
+
+        for (Map.Entry<String, MyPerson> e : list) {
+            System.out.println(e.getKey() + ", " + e.getValue());
+        }
+    }
+
+
+    private static void HashMap() {
+        Map<String, Person> hashmap = new HashMap<String, Person>(11);
+        Person personA = new Person("Meier", "Heinz", 33);
+        String keyA = "16233686";       //weitere Schluessel und Objekte erzeugen
+        hashmap.put(keyA, personA);     //weitere Schluessel-Wert-Paare hinzufügen
+        hashmap.put("007", new Person("Craig", "Daniel", 51));
+        hashmap.put("23", new Person("Wilkerson", "Malcom", 18));
+        hashmap.put("42", new Person("Douglas", "Adams", 49));
+
+        System.out.println("\nHashMap sequentiell durchlaufen:");
+        for (Map.Entry<String, Person> e : hashmap.entrySet())
+        {
+            String key = e.getKey();
+            Person person = e.getValue();
+            System.out.println("Schluessel: " + key +
+                    " Name: " + person.getLastname() + ", " +
+                    person.getPrename() + " Personal-Nr: " +
+                    person.getPersonalNr());
+            System.out.println(e.toString());
+        }
     }
 
     private static void SetOperation() {
