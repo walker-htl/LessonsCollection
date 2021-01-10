@@ -48,6 +48,19 @@ public class Main {
         for (Map.Entry<String, MyPerson> e : list) {
             System.out.println(e.getKey() + ", " + e.getValue());
         }
+
+        System.out.println();
+        System.out.println("Alternative in sorting a map");
+        MyPersonLastnameComparator lastnameComparator = new MyPersonLastnameComparator();
+        Map<MyPerson, String> sortedTreeMap = new TreeMap<MyPerson, String>(lastnameComparator);
+        sortedTreeMap.put(personA, keyA);
+        sortedTreeMap.put(new MyPerson("Craig", "Daniel", 51), "007");
+        sortedTreeMap.put(new MyPerson("Wilkerson", "Malcom", 18), "23");
+        sortedTreeMap.put(new MyPerson("Douglas", "Adams", 49), "42");
+
+        for (Map.Entry<MyPerson, String> item : sortedTreeMap.entrySet()) {
+            System.out.println(item.getKey() + ", " + item.getKey());
+        }
     }
 
 
