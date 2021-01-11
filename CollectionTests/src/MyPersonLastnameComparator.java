@@ -5,9 +5,4 @@ public class MyPersonLastnameComparator implements Comparator<MyPerson> {
     public int compare(MyPerson o1, MyPerson o2) {
         return o1.getLastname().compareTo(o2.getLastname());
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return false;
-    }
 }
