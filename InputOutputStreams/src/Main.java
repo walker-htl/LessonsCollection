@@ -3,13 +3,13 @@ import java.io.*;
 public class Main {
 
     public static void main(String[] args) {
-//        testFileWriter();
-        testFileWriterWithClosingResources();
-        testFileReader();
+        //testFileWriter();
+        //testFileWriterWithClosingResources();
+        //testFileReader();
         testFileReaderWithClosingResources();
-        testBufferedWriter();
-        testBufferedReaer();
-        testInputStreamReader();
+        //testBufferedWriter();
+        //testBufferedReaer();
+        //testInputStreamReader();
     }
 
     private static void testInputStreamReader() {
@@ -68,8 +68,9 @@ public class Main {
 
         try {
             FileReader fr = new FileReader("testCharFile.dat");
-            while ((x = fr.read()) != -1)
-                text += (char)x;
+            while ((x = fr.read()) != -1) {
+                text += (char) x;
+            }
             fr.close();
         } catch (IOException io){
             System.out.println(io.getMessage());
@@ -102,7 +103,7 @@ public class Main {
         System.out.println("Create file: testCharFile.dat");
 
         try {
-            FileWriter fw = new FileWriter("testCharFile.dat");
+            FileWriter fw = new FileWriter("testCharFile.dat", true);
             fw.write("1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
             fw.close();
         } catch (IOException ioex){
@@ -117,8 +118,8 @@ public class Main {
         System.out.println("User-Directory: " + System.getProperty("user.dir"));
         System.out.println("Create file: testCharFile.dat");
 
-        try (FileWriter fw = new FileWriter("testCharFile.dat")){
-            fw.write("1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
+        try (FileWriter fw = new FileWriter("testCharFile.dat", true)){
+            fw.write("\n1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
         } catch (IOException ioex){
             System.out.println(ioex.getMessage());
         }
