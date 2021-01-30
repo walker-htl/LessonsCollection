@@ -22,6 +22,7 @@ public class Main {
     }
 
     private static void testSerializeAndDeserializeLists() {
+        System.out.println("\nSTART: testSerializeAndDeserializeLists");
         // create an arbitrary list
         ArrayList<Person> persons = new ArrayList<>();
 
@@ -54,9 +55,11 @@ public class Main {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("END: testSerializeAndDeserializeLists");
     }
 
     private static void testSerializeAndDeserialize() {
+        System.out.println("\nSTART: testSerializeAndDeserialize");
         // wir erzeugen 3 Personen - Objekte
         Person max = new Person("Max", "Mustermann", 20);
         Person maria = new Person("Maria", "Musterfrau", 21);
@@ -89,10 +92,11 @@ public class Main {
         catch (IOException | ClassNotFoundException io) {
             System.out.println(io.getMessage());
         }
-
+        System.out.println("END: testSerializeAndDeserialize");
     }
 
     private static void testSystemInOut() {
+        System.out.println("\nSTART: testSystemInOut");
         byte[] b = new byte[1]; // byte array der Größe 1
 
         try {
@@ -102,9 +106,11 @@ public class Main {
         } catch (IOException io){
             System.out.println(io.getMessage());
         }
+        System.out.println("END: testSystemInOut");
     }
 
     private static void testStringReader() {
+        System.out.println("\nSTART: testStringReader");
         String s = "Java macht Spass";
         StringReader sr = new StringReader(s);
         int z;
@@ -115,9 +121,11 @@ public class Main {
         } catch (IOException io){
             System.out.println(io.getMessage());
         }
+        System.out.println("END: testStringReader");
     }
 
     private static void testStringWriter() {
+        System.out.println("\nSTART: testStringWriter");
         String s = "Java macht Spass";
         StringWriter sw = new StringWriter();
         int len = s.length();
@@ -128,9 +136,11 @@ public class Main {
         }
 
         System.out.println(sw.toString());
+        System.out.println("END: testStringWriter");
     }
 
     private static void testFilterWriter() {
+        System.out.println("\nSTART: testFilterWriter");
         try {
             FileWriter fw = new FileWriter("testLowerWriter.txt");
             LowerCaseFilterWriter filterWriter = new LowerCaseFilterWriter(fw);
@@ -139,9 +149,11 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("END: testFilterWriter");
     }
 
     private static void testPrintWriter() {
+        System.out.println("\nSTART: testPrintWriter");
         try {
             PrintWriter pw = new PrintWriter("testCharPrint.dat"); //String schreiben
             pw.println("Ausgabe des Flächeninhalts für Kreise mit: ");
@@ -153,6 +165,7 @@ public class Main {
         } catch (IOException io){
             System.out.println(io.getMessage());
         }
+        System.out.println("END: testPrintWriter");
     }
 
     private static void testInputStreamReader() {
@@ -213,8 +226,9 @@ public class Main {
 
         try {
             FileReader fr = new FileReader("testCharFile.dat");
-            while ((x = fr.read()) != -1)
-                text += (char)x;
+            while ((x = fr.read()) != -1) {
+                text += (char) x;
+            }
             fr.close();
         } catch (IOException io){
             System.out.println(io.getMessage());
@@ -247,7 +261,7 @@ public class Main {
         System.out.println("Create file: testCharFile.dat");
 
         try {
-            FileWriter fw = new FileWriter("testCharFile.dat");
+            FileWriter fw = new FileWriter("testCharFile.dat", true);
             fw.write("1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
             fw.close();
         } catch (IOException ioex){
@@ -262,8 +276,8 @@ public class Main {
         System.out.println("User-Directory: " + System.getProperty("user.dir"));
         System.out.println("Create file: testCharFile.dat");
 
-        try (FileWriter fw = new FileWriter("testCharFile.dat")){
-            fw.write("1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
+        try (FileWriter fw = new FileWriter("testCharFile.dat", true)){
+            fw.write("\n1. Zeile: Test Ausgabe \r\n2. Zeile: in eine Datei");
         } catch (IOException ioex){
             System.out.println(ioex.getMessage());
         }
