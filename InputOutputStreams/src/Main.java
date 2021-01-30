@@ -1,22 +1,165 @@
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 //        testFileWriter();
-        testFileWriterWithClosingResources();
-        testFileReader();
-        testFileReaderWithClosingResources();
-        testBufferedWriter();
-        testBufferedReaer();
-        testInputStreamReader();
+//        testFileWriterWithClosingResources();
+//        testFileReader();
+//        testFileReaderWithClosingResources();
+//        testBufferedWriter();
+//        testBufferedReaer();
+//        testInputStreamReader();
+//        testPrintWriter();
+//        testFilterWriter();
+//        testStringWriter();
+//        testStringReader();
+//        testSystemInOut();
+//        testSerializeAndDeserialize();
+        testSerializeAndDeserializeLists();
+    }
+
+    private static void testSerializeAndDeserializeLists() {
+        // create an arbitrary list
+        ArrayList<Person> persons = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            String firstName = "First" + (i + 1);
+            String secondName = "Last" + (i + 1);
+            int age = 20 + i;
+            persons.add(new Person(firstName, secondName, age));
+        }
+
+        // write the whole list to the objectOutputStream
+        try {
+            FileOutputStream outputStream = new FileOutputStream("Output.ser");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+
+            objectOutputStream.writeObject(persons);
+            objectOutputStream.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        // read the whole list from the objectInputStream
+        try {
+            FileInputStream fileInputStream=new FileInputStream("Output.ser");
+            ObjectInputStream stream=new ObjectInputStream(fileInputStream);
+            for(Person person : (ArrayList<Person>)stream.readObject())
+            {
+                System.out.println(person);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void testSerializeAndDeserialize() {
+        // wir erzeugen 3 Personen - Objekte
+        Person max = new Person("Max", "Mustermann", 20);
+        Person maria = new Person("Maria", "Musterfrau", 21);
+        Person hans = new Person("Hans", "Huber", 17);
+
+        // schreiben
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("objekte.ser"));){
+            oos.writeObject(max);
+            oos.writeObject(maria);
+            oos.writeObject(hans);
+        }
+        catch (IOException io) {
+            System.out.println(io.getMessage());
+        }
+
+        //lesen
+        List<Person> personList = new ArrayList<>(3);
+
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("objekte.ser"));){
+            Person p1 = (Person) ois.readObject();
+            Person p2 = (Person) ois.readObject();
+            Person p3 = (Person) ois.readObject();
+
+            System.out.println(p1);
+            System.out.println(p2);
+            System.out.println(p3);
+        }
+        catch (IOException | ClassNotFoundException io) {
+            System.out.println(io.getMessage());
+        }
+
+    }
+
+    private static void testSystemInOut() {
+        byte[] b = new byte[1]; // byte array der Größe 1
+
+        try {
+            System.out.print("Bitte geben Sie ein Zeichen ein: ");
+            System.in.read(b);
+            System.out.println((char)b[0] + " hat den ASCII-Code " + b[0]);
+        } catch (IOException io){
+            System.out.println(io.getMessage());
+        }
+    }
+
+    private static void testStringReader() {
+        String s = "Java macht Spass";
+        StringReader sr = new StringReader(s);
+        int z;
+
+        try {
+            while ((z = sr.read()) != -1)
+                System.out.println((char)z);
+        } catch (IOException io){
+            System.out.println(io.getMessage());
+        }
+    }
+
+    private static void testStringWriter() {
+        String s = "Java macht Spass";
+        StringWriter sw = new StringWriter();
+        int len = s.length();
+
+        for (int i = 0; i < len; i++) {
+            s = s.substring(0, s.length() - 1);
+            sw.write(s + "\n");
+        }
+
+        System.out.println(sw.toString());
+    }
+
+    private static void testFilterWriter() {
+        try {
+            FileWriter fw = new FileWriter("testLowerWriter.txt");
+            LowerCaseFilterWriter filterWriter = new LowerCaseFilterWriter(fw);
+            filterWriter.write("I LOVE SEW!");
+            filterWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void testPrintWriter() {
+        try {
+            PrintWriter pw = new PrintWriter("testCharPrint.dat"); //String schreiben
+            pw.println("Ausgabe des Flächeninhalts für Kreise mit: ");
+            for (int r = 1; r <= 10; r++) {
+                pw.print("Radius r = " + r + ": "); //String schreiben
+                pw.println(Math.PI * r * r); //double-Wert schreiben
+            }
+            pw.close();
+        } catch (IOException io){
+            System.out.println(io.getMessage());
+        }
     }
 
     private static void testInputStreamReader() {
         System.out.println("\nSTART: testInputStreamReader");
         System.out.print("Gib einen Text ein: ");
 
-        String s = null;
+        String s = "";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
             s = br.readLine();
         } catch (IOException e) {
@@ -48,6 +191,7 @@ public class Main {
     private static void testBufferedWriter() {
         System.out.println("\nSTART: testBufferedWriter");
         char[] ca = {'t', 'e', 's', 't', '1'};
+
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("testCharBuffer.dat"));
             for (int i = 0; i < 100; i++) {
@@ -58,6 +202,7 @@ public class Main {
         } catch(IOException io){
             System.out.println(io.getMessage());
         }
+
         System.out.println("END: testBufferedWriter");
     }
 
