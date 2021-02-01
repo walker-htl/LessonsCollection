@@ -18,7 +18,38 @@ public class Main {
 //        testStringReader();
 //        testSystemInOut();
 //        testSerializeAndDeserialize();
-        testSerializeAndDeserializeLists();
+//        testSerializeAndDeserializeLists();
+        testSerializeAndDeserializeComplexObjects();
+    }
+
+    private static void testSerializeAndDeserializeComplexObjects() {
+        System.out.println("\nSTART: testSerializeAndDeserializeComplexObjects");
+        List<Person> personList = new ArrayList<>();
+        personList.add(new Person("Max", "Mustermann", 12));
+        personList.add(new Person("Maria", "Musterfrau", 21));
+        personList.add(new Person("Hans", "Huber", 17));
+
+        ComplexObject complexObject = new ComplexObject(personList);
+        // schreiben
+        try (ObjectOutputStream oos = new ObjectOutputStream(
+                new FileOutputStream("objekte.ser"));){
+            oos.writeObject(complexObject);
+        }
+        catch (IOException io) {
+            System.out.println(io.getMessage());
+        }
+
+        //lesen
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream("objekte.ser"));){
+            ComplexObject o1 = (ComplexObject) ois.readObject();
+
+            System.out.println(o1);
+        }
+        catch (IOException | ClassNotFoundException io) {
+            System.out.println(io.getMessage());
+        }
+        System.out.println("END: testSerializeAndDeserializeComplexObjects");
     }
 
     private static void testSerializeAndDeserializeLists() {
